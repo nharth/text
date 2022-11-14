@@ -2,5 +2,5 @@
     <string name="app_name">Replace Text</string>
     <string name="select_image">Select Image</string>
     <string name="get_text">Get Text</string>
-    <string name="take_picture">Take Picture</string>
+    <string name="take_picture">Select Image</string>
 </resources>

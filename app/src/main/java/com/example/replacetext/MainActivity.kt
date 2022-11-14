@@ -108,7 +108,7 @@ class MainActivity : AppCompatActivity() {
         val popupMenu = PopupMenu(this, takePictureBtn)
 
         popupMenu.menu.add(Menu.NONE, 1, 1, "CAMERA")
-        popupMenu.menu.add(Menu.NONE, 1, 1, "GALLERY")
+        popupMenu.menu.add(Menu.NONE, 2, 1, "GALLERY")
 
         popupMenu.show()
 
@@ -116,7 +116,7 @@ class MainActivity : AppCompatActivity() {
             val id = menuItem.itemId
             if (id == 1) {
                 if (checkCameraPermissions()) {
-                    pickImageGallery()
+                    pickImageCamera()
                 } else {
                     requestCameraPermissions()
                 }
