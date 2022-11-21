@@ -60,5 +60,16 @@
         app:layout_constraintVertical_bias="0.649"
         app:srcCompat="@drawable/ic_launcher_foreground" />
 
+    <TextView
+        android:id="@+id/overlayTextView"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:scrollbars="vertical"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toTopOf="@+id/takeButton"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/imageView" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

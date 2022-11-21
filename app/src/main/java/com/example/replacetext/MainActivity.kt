@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.LiveFolders.INTENT
 import android.provider.MediaStore
+import android.text.method.ScrollingMovementMethod
 import android.view.Menu
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
@@ -29,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var recognizeBtn: Button
     private lateinit var imageDisplay: ImageView
     private lateinit var recognizedTextView: TextView
+    private lateinit var overlayText: TextView
 
     private companion object {
         private const val CAMERA_REQUEST_CODE = 100
@@ -55,6 +57,7 @@ class MainActivity : AppCompatActivity() {
         recognizeBtn = findViewById(R.id.recogButton)
         imageDisplay = findViewById(R.id.imageView)
         recognizedTextView = findViewById(R.id.textView)
+        overlayText = findViewById(R.id.overlayTextView)
 
         //initalize array of permissions
         cameraPermissions = arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -68,6 +71,10 @@ class MainActivity : AppCompatActivity() {
 
         takePictureBtn.setOnClickListener {
             showInputImageDialog()
+            if (overlayText.text.isNotEmpty()) {
+                overlayText.text = ""
+                overlayText.background.alpha = 0
+            }
         }
 
         recognizeBtn.setOnClickListener {
@@ -91,7 +98,10 @@ class MainActivity : AppCompatActivity() {
             val textTaskResult = textRecognizer.process(inputImage).addOnSuccessListener { text->
                 progressDialog.dismiss()
                 val recognizedText = text.text
-                recognizedTextView.text = recognizedText
+                overlayText.setTextColor(resources.getColor(R.color.black))
+                overlayText.text = recognizedText
+                overlayText.setBackgroundColor(resources.getColor(R.color.white))
+                overlayText.movementMethod = ScrollingMovementMethod()
             }.addOnFailureListener { e->
                 progressDialog.dismiss()
                 showToast("Failed to recognize text due to ${e.message}")
